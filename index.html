@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Atlantic Trust - Web3 Banking & Fintech</title>
     <style>
-        /* Modern CSS Reset & Variable Definitions */
         :root {
             --bg-primary: #f4f6f9;
             --surface-color: #ffffff;
@@ -45,7 +44,6 @@
             overflow-x: hidden;
         }
 
-        /* Mobile Wrapper Container */
         .app-container {
             width: 100%;
             max-width: 480px;
@@ -66,19 +64,8 @@
             }
         }
 
-        /* Helper Classes */
         .hidden { display: none !important; }
-        .flex { display: flex; }
-        .flex-col { flex-direction: column; }
-        .items-center { align-items: center; }
-        .justify-between { justify-content: space-between; }
-        .justify-center { justify-content: center; }
-        .gap-1 { gap: 4px; }
-        .gap-2 { gap: 8px; }
-        .gap-3 { gap: 12px; }
-        .gap-4 { gap: 16px; }
 
-        /* Auth Screen */
         .auth-screen {
             position: absolute;
             inset: 0;
@@ -205,7 +192,6 @@
             gap: 8px;
         }
 
-        /* Screen View Engine */
         .main-content {
             flex: 1;
             overflow-y: auto;
@@ -227,7 +213,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Top Header */
         .app-header {
             display: flex;
             align-items: center;
@@ -253,6 +238,7 @@
             font-weight: 700;
             font-size: 16px;
             box-shadow: var(--shadow-sm);
+            text-transform: uppercase;
         }
 
         .greeting-title {
@@ -286,7 +272,6 @@
             border-radius: 50%;
         }
 
-        /* Fiat Balance Card */
         .card-fiat {
             background: linear-gradient(135deg, #0052ff 0%, #0b5ed7 100%);
             border-radius: var(--radius-lg);
@@ -363,7 +348,6 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        /* Bitcoin Sub Card */
         .card-btc {
             background: var(--surface-color);
             border-radius: var(--radius-md);
@@ -436,7 +420,6 @@
             background: #e2e8f0;
         }
 
-        /* Quick Action Grid */
         .section-title {
             font-size: 15px;
             font-weight: 700;
@@ -490,7 +473,6 @@
             text-align: center;
         }
 
-        /* Virtual Card Banner */
         .virtual-card-banner {
             background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
             border-radius: var(--radius-md);
@@ -534,7 +516,6 @@
             border-radius: 4px;
         }
 
-        /* Standard Cards & Controls */
         .card-panel {
             background-color: var(--surface-color);
             border-radius: var(--radius-md);
@@ -582,7 +563,6 @@
             line-height: 1.4;
         }
 
-        /* Bottom Navigation Bar */
         .bottom-nav {
             position: absolute;
             bottom: 0;
@@ -636,7 +616,6 @@
             border: 3px solid var(--surface-color);
         }
 
-        /* Grid Modal Overlay */
         .modal-overlay {
             position: absolute;
             inset: 0;
@@ -721,7 +700,6 @@
             text-align: center;
         }
 
-        /* Success Feedback Banner */
         .toast {
             position: absolute;
             top: 20px;
@@ -748,15 +726,13 @@
 </head>
 <body>
 
-    <!-- Main Mobile Application Container -->
     <div class="app-container">
 
-        <!-- Toast Notification Engine -->
         <div id="toast" class="toast">
             <span>✓</span> <span id="toast-message">Operation completed successfully!</span>
         </div>
 
-        <!-- 1. AUTHENTICATION GATE (LOGIN SCREEN) -->
+        <!-- AUTHENTICATION SCREEN -->
         <div id="auth-screen" class="auth-screen">
             <div class="auth-brand">
                 <div class="auth-brand-logo">🏛️</div>
@@ -766,13 +742,13 @@
 
             <div class="auth-card">
                 <div id="auth-error" class="auth-error">
-                    <span>⚠️</span> <span id="error-text">Invalid Account Name or Passcode</span>
+                    <span>⚠️</span> <span id="error-text">Invalid Passcode</span>
                 </div>
 
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label for="acc-name">Account Name</label>
-                        <input type="text" id="acc-name" class="form-input" placeholder="e.g. Emily Lawson" required autocomplete="off">
+                        <input type="text" id="acc-name" class="form-input" value="John Doe" placeholder="Enter account name" required autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -791,29 +767,26 @@
             </p>
         </div>
 
-        <!-- Main Scrollable App Content Area -->
+        <!-- MAIN APP CONTENT -->
         <div class="main-content">
 
-            <!-- 2. MAIN BANKING DASHBOARD PAGE -->
+            <!-- DASHBOARD VIEW -->
             <div id="page-dashboard" class="view-page active">
-                
-                <!-- Top Header -->
                 <div class="app-header">
                     <div class="user-profile">
-                        <div class="avatar">EL</div>
+                        <div class="avatar" id="user-avatar">JD</div>
                         <div>
-                            <div class="greeting-title">Good Afternoon, Emily</div>
+                            <div class="greeting-title" id="greeting-display">Good Day, John Doe</div>
                             <div class="greeting-sub" id="live-time">Today, 12:00 PM</div>
                         </div>
                     </div>
                     <div class="badge-status">Active</div>
                 </div>
 
-                <!-- Main Fiat Balance Card -->
                 <div class="card-fiat">
                     <div class="fiat-label">
                         <span>Fiat Main Balance</span>
-                        <span class="eye-icon" onclick="toggleBalanceVisibility()" id="eye-btn" title="Toggle Visibility">👁️</span>
+                        <span class="eye-icon" onclick="toggleBalanceVisibility()" id="eye-btn">👁️</span>
                     </div>
                     <div class="fiat-amount" id="fiat-display">$190,695.00</div>
                     <div class="fiat-account-no">ACC: 45465777052</div>
@@ -824,7 +797,6 @@
                     </div>
                 </div>
 
-                <!-- Bitcoin Sub-Card -->
                 <div class="card-btc">
                     <div class="btc-header">
                         <div class="btc-title-group">
@@ -844,7 +816,6 @@
                     </div>
                 </div>
 
-                <!-- Quick Action Grid (4 tiles) -->
                 <div class="section-title">Quick Services</div>
                 <div class="quick-actions-grid">
                     <div class="action-tile" onclick="openMenuModal()">
@@ -865,7 +836,6 @@
                     </div>
                 </div>
 
-                <!-- Virtual Debit Card Preview Banner -->
                 <div class="virtual-card-banner">
                     <div class="banner-info">
                         <h4>Atlantic Trust Virtual</h4>
@@ -873,10 +843,9 @@
                     </div>
                     <div class="banner-chip"></div>
                 </div>
-
             </div>
 
-            <!-- 4. INTERNATIONAL TRANSFER & CRYPTO WITHDRAWAL SCREEN -->
+            <!-- TRANSFER VIEW -->
             <div id="page-transfer" class="view-page">
                 <div class="section-title" style="font-size: 18px; margin-bottom: 16px;">Transfer & Withdraw</div>
 
@@ -886,7 +855,6 @@
 
                 <div class="card-panel">
                     <form onsubmit="handleTransferSubmit(event)">
-                        
                         <div class="form-group">
                             <label style="color: var(--text-main);">Payment Method</label>
                             <select class="select-box" id="transfer-method" required>
@@ -923,7 +891,7 @@
                 </div>
             </div>
 
-            <!-- 5. IN-APP CRYPTO SWAP WIDGET -->
+            <!-- SWAP VIEW -->
             <div id="page-swap" class="view-page">
                 <div class="section-title" style="font-size: 18px; margin-bottom: 16px;">Crypto Swap Converter</div>
 
@@ -952,7 +920,7 @@
                 </div>
             </div>
 
-            <!-- 6. IDENTITY VERIFICATION (KYC) SCREEN -->
+            <!-- KYC VIEW -->
             <div id="page-kyc" class="view-page">
                 <div class="section-title" style="font-size: 18px; margin-bottom: 16px;">Identity Verification (KYC)</div>
 
@@ -964,7 +932,7 @@
                     <form onsubmit="handleKYCSubmit(event)">
                         <div class="form-group">
                             <label style="color: var(--text-main);">Full Name</label>
-                            <input type="text" class="input-box" value="Emily Lawson" required>
+                            <input type="text" id="kyc-full-name" class="input-box" value="John Doe" required>
                         </div>
 
                         <div class="form-group">
@@ -974,7 +942,7 @@
 
                         <div class="form-group">
                             <label style="color: var(--text-main);">ID.me Registered Email</label>
-                            <input type="email" class="input-box" placeholder="emily.lawson@domain.com" required>
+                            <input type="email" class="input-box" placeholder="john.doe@domain.com" required>
                         </div>
 
                         <div class="form-group">
@@ -1001,15 +969,14 @@
 
         </div>
 
-        <!-- 3. CENTRAL MENU GRID MODAL OVERLAY -->
+        <!-- MODAL MENU -->
         <div id="menu-modal" class="modal-overlay" onclick="closeMenuModal(event)">
             <div class="modal-sheet" onclick="event.stopPropagation()">
-                
                 <div class="modal-header">
                     <div class="modal-user">
-                        <div class="avatar">EL</div>
+                        <div class="avatar" id="modal-avatar">JD</div>
                         <div>
-                            <div style="font-weight: 700; font-size: 15px;">Emily Lawson</div>
+                            <div style="font-weight: 700; font-size: 15px;" id="modal-user-name">John Doe</div>
                             <div style="font-size: 11px; color: var(--text-muted); font-family: monospace;">Account: 45465777052</div>
                         </div>
                     </div>
@@ -1062,11 +1029,10 @@
                         <div class="modal-tile-label" style="color: var(--danger-color);">Logout</div>
                     </div>
                 </div>
-
             </div>
         </div>
 
-        <!-- BOTTOM NAVIGATION BAR -->
+        <!-- BOTTOM NAV BAR -->
         <nav class="bottom-nav">
             <div class="nav-item active" id="nav-dashboard" onclick="switchTab('dashboard')">
                 <div class="nav-icon">🏠</div>
@@ -1077,7 +1043,7 @@
                 <span>Transfers</span>
             </div>
 
-            <div class="nav-menu-btn" onclick="openMenuModal()" title="Open Main Menu">
+            <div class="nav-menu-btn" onclick="openMenuModal()">
                 ⚡
             </div>
 
@@ -1094,54 +1060,78 @@
     </div>
 
     <script>
-        // State Management Variables
         let isBalanceHidden = false;
+        let activeUserName = "John Doe";
         const BTC_RATE = 65000.00;
 
-        // Initialize App on DOM Load
         window.addEventListener('DOMContentLoaded', () => {
             updateLiveTime();
             setInterval(updateLiveTime, 60000);
             calculateSwap('usd');
         });
 
-        // 1. Authentication Engine
+        function getGreetingPrefix() {
+            const hour = new Date().getHours();
+            if (hour >= 5 && hour < 12) {
+                return "Good Morning";
+            } else if (hour >= 12 && hour < 17) {
+                return "Good Afternoon";
+            } else {
+                return "Good Evening";
+            }
+        }
+
+        function getInitials(name) {
+            const parts = name.trim().split(' ').filter(p => p.length > 0);
+            if (parts.length === 0) return "JD";
+            if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
+            return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+        }
+
         function handleLogin(event) {
             event.preventDefault();
             const nameInput = document.getElementById('acc-name').value.trim();
             const passcodeInput = document.getElementById('acc-passcode').value.trim();
             const errorElement = document.getElementById('auth-error');
 
-            if (nameInput === "Emily Lawson" && passcodeInput === "10982") {
+            if (passcodeInput === "10982") {
                 errorElement.style.display = "none";
+                activeUserName = nameInput || "John Doe";
+                
+                // Update User Details
+                const greetingPrefix = getGreetingPrefix();
+                const initials = getInitials(activeUserName);
+                
+                document.getElementById('greeting-display').innerText = `${greetingPrefix}, ${activeUserName}`;
+                document.getElementById('user-avatar').innerText = initials;
+                document.getElementById('modal-avatar').innerText = initials;
+                document.getElementById('modal-user-name').innerText = activeUserName;
+                document.getElementById('kyc-full-name').value = activeUserName;
+
                 document.getElementById('auth-screen').classList.add('hidden');
-                showToast("Welcome back, Emily Lawson!");
+                showToast(`Welcome back, ${activeUserName}!`);
             } else {
                 errorElement.style.display = "flex";
-                document.getElementById('error-text').innerText = "Invalid Account Name or Passcode";
+                document.getElementById('error-text').innerText = "Invalid Passcode";
             }
         }
 
         function handleLogout() {
             document.getElementById('auth-screen').classList.remove('hidden');
-            document.getElementById('login-form').reset();
+            document.getElementById('acc-passcode').value = "";
             switchTab('dashboard');
             showToast("Successfully logged out.");
         }
 
-        // 2. Navigation & Screen Tab Engine
         function switchTab(tabId) {
-            // Hide all screen pages
             const pages = document.querySelectorAll('.view-page');
             pages.forEach(page => page.classList.remove('active'));
 
-            // Show selected page
             const targetPage = document.getElementById(`page-${tabId}`);
             if (targetPage) {
                 targetPage.classList.add('active');
             }
 
-            // Update bottom navigation bar state
             const navItems = document.querySelectorAll('.nav-item');
             navItems.forEach(item => item.classList.remove('active'));
 
@@ -1151,7 +1141,6 @@
             }
         }
 
-        // 3. Balance Visibility Toggle Engine
         function toggleBalanceVisibility() {
             const displayEl = document.getElementById('fiat-display');
             const eyeBtn = document.getElementById('eye-btn');
@@ -1167,7 +1156,6 @@
             }
         }
 
-        // 4. Grid Modal Overlay Controls
         function openMenuModal() {
             document.getElementById('menu-modal').classList.add('active');
         }
@@ -1176,7 +1164,6 @@
             document.getElementById('menu-modal').classList.remove('active');
         }
 
-        // 5. Live Swap Converter Calculation Logic
         function calculateSwap(direction) {
             const usdInput = document.getElementById('swap-usd-input');
             const btcInput = document.getElementById('swap-btc-input');
@@ -1199,7 +1186,6 @@
             showToast(`Swapped $${usdVal} USD for ${btcVal} BTC!`);
         }
 
-        // 6. Form Submission Handlers
         function handleTransferSubmit(e) {
             e.preventDefault();
             const method = document.getElementById('transfer-method').value;
@@ -1213,7 +1199,6 @@
             switchTab('dashboard');
         }
 
-        // Helper: Toast Alert System
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMsg = document.getElementById('toast-message');
@@ -1225,7 +1210,6 @@
             }, 3500);
         }
 
-        // Helper: Time Display Updates
         function updateLiveTime() {
             const timeEl = document.getElementById('live-time');
             if (timeEl) {
