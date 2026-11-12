@@ -233,7 +233,7 @@
             display: flex;
             align-items: center;
             justify-content: space-between;
-            margin-bottom: 20px;
+            margin-bottom: 14px;
         }
 
         .header-logo-group {
@@ -283,17 +283,6 @@
             text-transform: uppercase;
         }
 
-        .greeting-title {
-            font-size: 16px;
-            font-weight: 700;
-            color: var(--text-main);
-        }
-
-        .greeting-sub {
-            font-size: 12px;
-            color: var(--text-muted);
-        }
-
         .badge-status {
             background-color: rgba(16, 185, 129, 0.12);
             color: var(--success-color);
@@ -312,6 +301,35 @@
             height: 6px;
             background-color: var(--success-color);
             border-radius: 50%;
+        }
+
+        /* DASHBOARD FROZEN STATUS BANNER */
+        .frozen-banner {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: #c83e3b;
+            padding: 12px 18px;
+            border-radius: 26px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+            margin-bottom: 16px;
+            font-size: 13.5px;
+            font-weight: 600;
+            line-height: 1.35;
+        }
+
+        .frozen-dot {
+            width: 9px;
+            height: 9px;
+            background-color: #c83e3b;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .frozen-text {
+            text-align: right;
+            flex: 1;
         }
 
         .card-fiat {
@@ -811,7 +829,7 @@
                 <form id="login-form" onsubmit="handleLogin(event)">
                     <div class="form-group">
                         <label for="acc-name">Account Name</label>
-                        <input type="text" id="acc-name" class="form-input" value="John Doe" placeholder="Enter account name" required autocomplete="off">
+                        <input type="text" id="acc-name" class="form-input" placeholder="Enter account name" required autocomplete="off">
                     </div>
 
                     <div class="form-group">
@@ -847,8 +865,14 @@
                         <div class="header-brand-title">Atlantic Bank</div>
                     </div>
                     <div class="user-profile">
-                        <div class="avatar" id="user-avatar">JD</div>
+                        <div class="avatar" id="user-avatar">AB</div>
                     </div>
+                </div>
+
+                <!-- DASHBOARD FROZEN STATUS NOTIFICATION -->
+                <div class="frozen-banner">
+                    <span class="frozen-dot"></span>
+                    <span class="frozen-text">Frozen until Debit card is processed by account holders name</span>
                 </div>
 
                 <div class="card-fiat">
@@ -1003,7 +1027,7 @@
                     <form onsubmit="handleKYCSubmit(event)">
                         <div class="form-group">
                             <label style="color: var(--text-main);">Full Name</label>
-                            <input type="text" id="kyc-full-name" class="input-box" value="John Doe" required>
+                            <input type="text" id="kyc-full-name" class="input-box" placeholder="Enter full legal name" required>
                         </div>
 
                         <div class="form-group">
@@ -1045,9 +1069,9 @@
             <div class="modal-sheet" onclick="event.stopPropagation()">
                 <div class="modal-header">
                     <div class="modal-user">
-                        <div class="avatar" id="modal-avatar">JD</div>
+                        <div class="avatar" id="modal-avatar">AB</div>
                         <div>
-                            <div style="font-weight: 700; font-size: 15px;" id="modal-user-name">John Doe</div>
+                            <div style="font-weight: 700; font-size: 15px;" id="modal-user-name">Account Holder</div>
                             <div style="font-size: 11px; color: var(--text-muted); font-family: monospace;">Account: 45465777052</div>
                         </div>
                     </div>
@@ -1091,7 +1115,6 @@
                         <div class="modal-tile-icon">⚙️</div>
                         <div class="modal-tile-label">Settings / KYC</div>
                     </div>
-                    <!-- SUPPORT TILE WITH DIRECT MAILTO LINK -->
                     <a href="mailto:help.payflow01@gmail.com" class="modal-tile" onclick="closeMenuModal();">
                         <div class="modal-tile-icon">🎧</div>
                         <div class="modal-tile-label">Support</div>
@@ -1133,7 +1156,7 @@
 
     <script>
         let isBalanceHidden = false;
-        let activeUserName = "John Doe";
+        let activeUserName = "";
         const BTC_RATE = 65000.00;
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1142,7 +1165,7 @@
 
         function getInitials(name) {
             const parts = name.trim().split(' ').filter(p => p.length > 0);
-            if (parts.length === 0) return "JD";
+            if (parts.length === 0) return "AB";
             if (parts.length === 1) return parts[0].substring(0, 2).toUpperCase();
             return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
         }
@@ -1155,7 +1178,7 @@
 
             if (passcodeInput === "10982") {
                 errorElement.style.display = "none";
-                activeUserName = nameInput || "John Doe";
+                activeUserName = nameInput;
                 
                 const initials = getInitials(activeUserName);
                 
@@ -1174,6 +1197,7 @@
 
         function handleLogout() {
             document.getElementById('auth-screen').classList.remove('hidden');
+            document.getElementById('acc-name').value = "";
             document.getElementById('acc-passcode').value = "";
             switchTab('dashboard');
             showToast("Successfully logged out.");
